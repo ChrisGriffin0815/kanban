@@ -1,22 +1,57 @@
 <template>
-  <div class="home flex-grow-1 d-flex flex-column align-items-center justify-content-center">
-    <img src="https://bcw.blob.core.windows.net/public/img/8600856373152463" alt="CodeWorks Logo">
-    <h1 class="my-5 bg-dark text-light p-3 rounded d-flex align-items-center">
-      <span class="mx-2 text-white">Vue 3 Starter</span>
-    </h1>
-    <button class="btn btn-dark btn-link">
-      Create Board
-    </button>
+  <div class="home container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <form action="" @submit.prevent="createBoard()">
+          <div class="form-group">
+            <input type="text"
+                   name=""
+                   id=""
+                   class="form-control"
+                   placeholder="Enter Title"
+                   aria-describedby="helpId"
+                   v-model="state.newBoard.title"
+            >
+          </div>
+          <button type="submit" class="btn btn-dark btn-link">
+            Create Board
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <BoardComponent v-for="board in boards" :key="board.id" :board-props="board" />
+    </div>
   </div>
 </template>
 
 <script>
+import { reactive, computed, onMounted } from 'vue'
+import { AppState } from '../AppState'
+import { boardService } from '../services/BoardService'
+import BoardComponent from '../components/BoardComponent'
 export default {
   name: 'Home',
   setup() {
-    return {}
+    onMounted(() => {
+      boardService.getAllBoards()
+    })
+    const state = reactive({
+      newBoard: {
+
+      }
+    })
+    return {
+      state,
+      profile: computed(() => AppState.profile),
+      boards: computed(() => AppState.boards),
+
+      createBoard(newBoard) {
+        boardService.createBoard(state.newBoard)
+      }
+    }
   },
-  components: {}
+  components: { BoardComponent }
 }
 </script>
 

@@ -1,11 +1,9 @@
-
-  {
-    "name": "kannbann",
-    "version": "1.0.0",
-    "scripts": {
-      "setup": "npm run setup:client && npm run setup:server",
-      "setup:client": "cd kannbann.client && npm i",
-      "setup:server": "cd kannbann.server && npm i"
-    }
+{
+  "name": "kannbann",
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "npm run setup:client && npm run setup:server",
+    "setup:client": "cd kannbann.client && npm i",
+    "setup:server": "cd kannbann.server && npm i"
   }
-  
+}

@@ -13,4 +13,11 @@ const Profile = new Schema(
   { timestamps: true, _id: false, toJSON: { virtuals: true } }
 )
 
+Profile.virtual('creator', {
+  localField: 'creatorId',
+  ref: 'Profile',
+  foreignField: '_id',
+  justOne: true
+})
+
 export default Profile

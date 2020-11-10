@@ -8,6 +8,14 @@ class BoardService {
   async create(body) {
     return await dbContext.Boards.create(body)
   }
+
+  async delete(id) {
+    return await dbContext.Boards.findByIdAndDelete(id)
+  }
+
+  async edit(id, newBoard) {
+    return await dbContext.Boards.findByIdAndUpdate(id, newBoard)
+  }
 }
 
 export const boardService = new BoardService()
