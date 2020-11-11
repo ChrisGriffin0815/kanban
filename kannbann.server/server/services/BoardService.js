@@ -2,7 +2,7 @@ import { dbContext } from '../db/DbContext'
 
 class BoardService {
   async getAll(query = {}) {
-    return await dbContext.Boards.find(query).populate('profile')
+    return await dbContext.Boards.find(query).populate('Profile')
   }
 
   async create(body) {

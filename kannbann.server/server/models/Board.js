@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-// const ObjectId = Schema.Types.ObjectId
+const ObjectId = Schema.Types.ObjectId
 const Board = new Schema(
   {
     title: { type: String, required: true },
-    creatorId: { type: String }
+    creatorId: { type: String, ref: 'Profile', required: true }
   },
 
   { timestamps: true, toJSON: { virtuals: true } }

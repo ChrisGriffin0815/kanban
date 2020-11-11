@@ -1,6 +1,7 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { boardService } from '../services/BoardService'
+import { listService } from '../services/ListService'
 export class BoardController extends BaseController {
   constructor() {
     super('api/boards')
@@ -10,6 +11,15 @@ export class BoardController extends BaseController {
       .post('', this.create)
       .delete('/:id', this.delete)
       .put('/:id', this.edit)
+      .get('/:boardId/lists', this.getListByBoard)
+  }
+
+  async getListByBoard(req, res, next) {
+    try {
+      res.send(await listService.getAllLists(req.params.boardId))
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getAll(req, res, next) {
@@ -22,7 +32,7 @@ export class BoardController extends BaseController {
 
   async create(req, res, next) {
     try {
-      req.body.profile = req.userInfo.id
+      req.body.creatorId = req.userInfo.id
       res.send(await boardService.create(req.body))
     } catch (error) {
       next(error)
