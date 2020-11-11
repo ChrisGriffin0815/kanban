@@ -1,16 +1,18 @@
 {
   "folders": [
     {
+      "name": "kannbann.client",
       "path": "kannbann.client"
     },
     {
+      "name": "kannbann.server",
       "path": "kannbann.server"
     }
   ],
   "settings": {
     "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "vs-seti",
     "git.enableSmartCommit": true,
     "git.confirmSync": false,
     "git.autofetch": true,
