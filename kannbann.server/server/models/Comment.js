@@ -1,13 +1,13 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-const Task = new Schema(
+const Comment = new Schema(
   {
     title: { type: String, required: true },
-    listId: { type: String, required: true, ref: 'List' },
+    taskId: { type: String, required: true, ref: 'Task' },
     creatorId: { type: String, ref: 'Profile', required: true }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )
 
-export default Task
+export default Comment

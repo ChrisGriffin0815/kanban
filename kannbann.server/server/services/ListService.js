@@ -5,7 +5,11 @@ class ListService {
     return await (await dbContext.Lists.create(body))
   }
 
-  async getAllLists(boardId) {
+  async getAllListsByCreator(query = {}) {
+    return await dbContext.Lists.find(query).populate('Board').populate('Profile')
+  }
+
+  async getAllListsByBoard(boardId) {
     return await dbContext.Lists.find({ boardId: boardId }).populate('Board').populate('Profile')
   }
 
