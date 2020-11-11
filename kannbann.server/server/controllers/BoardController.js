@@ -16,7 +16,7 @@ export class BoardController extends BaseController {
 
   async getListByBoard(req, res, next) {
     try {
-      res.send(await listService.getAllLists(req.params.boardId))
+      res.send(await listService.getAllListsByBoard(req.params.boardId))
     } catch (error) {
       next(error)
     }
