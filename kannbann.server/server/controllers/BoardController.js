@@ -9,8 +9,8 @@ export class BoardController extends BaseController {
       .get('', this.getAll)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
-      .delete('/:id', this.delete)
-      .put('/:id', this.edit)
+      .delete('/:boardId', this.deleteBoard)
+      .put('/:boardId', this.edit)
       .get('/:boardId/lists', this.getListByBoard)
   }
 
@@ -39,9 +39,10 @@ export class BoardController extends BaseController {
     }
   }
 
-  async delete(req, res, next) {
+  async deleteBoard(req, res, next) {
     try {
-      res.send(await boardService.delete(req.params.id))
+      const userId = req.userInfo.id
+      res.send(await boardService.deleteBoard(req.params.boardId, userId))
     } catch (error) {
       next(error)
     }
@@ -49,7 +50,8 @@ export class BoardController extends BaseController {
 
   async edit(req, res, next) {
     try {
-      res.send(await boardService.edit(req.params.id, req.body))
+      const userId = req.userInfo.id
+      res.send(await boardService.edit(req.params.boardId, req.body, userId))
     } catch (error) {
       next(error)
     }
