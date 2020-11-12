@@ -1,9 +1,9 @@
 <template>
   <div class="home container-fluid">
     <div class="row">
-      <div class="col-12">
+      <div class="col-6 offset-3 my-4">
         <form action="" @submit.prevent="createBoard()">
-          <div class="form-group">
+          <div class="d-flex">
             <input type="text"
                    name=""
                    id=""
@@ -12,10 +12,10 @@
                    aria-describedby="helpId"
                    v-model="state.newBoard.title"
             >
+            <button type="submit" class="btn bg-transpare">
+              <i class="fas fa-plus-circle"></i>
+            </button>
           </div>
-          <button type="submit" class="btn btn-dark btn-link">
-            Create Board
-          </button>
         </form>
       </div>
     </div>
@@ -29,6 +29,8 @@
 import { reactive, computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 import { boardService } from '../services/BoardService'
+// import { listService } from '../services/ListService'
+
 import BoardComponent from '../components/BoardComponent'
 export default {
   name: 'Home',
@@ -56,12 +58,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home{
-  text-align: center;
-  user-select: none;
-  > img{
-    height: 200px;
-    width: 200px;
-  }
-}
+
 </style>

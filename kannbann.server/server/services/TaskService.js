@@ -10,6 +10,10 @@ class TaskService {
     return await dbContext.Tasks.find({ listId: listId }).populate('List').populate('Profile')
   }
 
+  async getAllTasks(query = {}) {
+    return await dbContext.Tasks.find(query).populate('Board').populate('Profile')
+  }
+
   // NOTE verify that the user == creator
   async deleteTask(taskId, userId) {
     const exists = await dbContext.Tasks.findById(taskId)

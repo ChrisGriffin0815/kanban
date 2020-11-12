@@ -6,6 +6,7 @@ class BoardService {
     try {
       const res = await api.post('api/boards/', newBoard)
       logger.log(res.data)
+      this.getAllBoards()
     } catch (error) {
       logger.error(error)
     }

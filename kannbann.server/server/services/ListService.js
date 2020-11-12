@@ -5,7 +5,7 @@ class ListService {
     return await (await dbContext.Lists.create(body))
   }
 
-  async getAllListsByCreator(query = {}) {
+  async getAllLists(query = {}) {
     return await dbContext.Lists.find(query).populate('Board').populate('Profile')
   }
 

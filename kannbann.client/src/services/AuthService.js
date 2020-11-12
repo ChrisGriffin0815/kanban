@@ -5,6 +5,8 @@ import router from '../router'
 import { setBearer } from './AxiosService'
 import { profileService } from './ProfileService'
 import { boardService } from './BoardService'
+import { listService } from './ListService'
+
 export const AuthService = initialize({
   domain,
   clientId,
@@ -23,5 +25,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await profileService.getProfile()
   AppState.user = AuthService.user
   await boardService.getAllBoards()
+  await listService.getAllLists()
+
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })

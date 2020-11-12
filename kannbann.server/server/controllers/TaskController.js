@@ -10,6 +10,15 @@ export class TaskController extends BaseController {
       .post('', this.create)
       .delete('/:taskId', this.deleteTask)
       .put('/:taskId', this.editTask)
+      .get('', this.getAllTasks)
+  }
+
+  async getAllTasks(req, res, next) {
+    try {
+      res.send(await taskService.getAllTasks(req.query))
+    } catch (error) {
+      next(error)
+    }
   }
 
   async create(req, res, next) {
