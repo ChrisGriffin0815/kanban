@@ -10,6 +10,15 @@ export class CommentController extends BaseController {
       .post('', this.create)
       .delete('/:commentId', this.deleteComment)
       .put('/:commentId', this.editComment)
+      .get('', this.getAll)
+  }
+
+  async getAll(req, res, next) {
+    try {
+      res.send(await commentService.getAll(req.query))
+    } catch (error) {
+      next(error)
+    }
   }
 
   async create(req, res, next) {

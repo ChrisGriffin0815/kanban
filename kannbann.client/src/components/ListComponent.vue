@@ -19,7 +19,7 @@
           >
             <i class="fas fa-plus-circle text-dark"></i>
           </button>
-          <button class="btn bg-transparent">
+          <button @click="deleteList(listProps.id)" class="btn bg-transparent">
             <i class="fas fa-trash"></i>
           </button>
         </div>
@@ -30,7 +30,7 @@
       <div class="collapse" :id="'collapse'+listProps.id">
         <div class="row">
           <div class="col-12">
-            <form class="form-group" @submit="createTask(listProps.id)">
+            <form class="form-group" @submit.prevent="createTask(listProps.id)">
               <input class="form" type="text" placeholder="New Task" v-model="state.newTask.title">
               <button type="submit" class="btn btn-primary">
                 +
@@ -48,6 +48,7 @@ import TaskComponent from '../components/TaskComponent'
 import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
 import { taskService } from '../services/TaskService'
+import { listService } from '../services/ListService'
 export default {
   name: 'ListComponent',
   props: ['listProps', 'boardProp'],
@@ -66,6 +67,9 @@ export default {
       },
       deleteTasks(listId) {
         taskService.deleteTasks(listId)
+      },
+      deleteList(listId) {
+        listService.deleteList(listId)
       }
     }
   },

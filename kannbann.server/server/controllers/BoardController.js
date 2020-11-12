@@ -7,12 +7,12 @@ export class BoardController extends BaseController {
     super('api/boards')
     this.router
       .get('', this.getAll)
+      .get('/:boardId', this.getActiveBoard)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
       .delete('/:boardId', this.deleteBoard)
       .put('/:boardId', this.edit)
       .get('/:boardId/lists', this.getListByBoard)
-      .get('/:boardId', this.getActiveBoard)
   }
 
   async getListByBoard(req, res, next) {

@@ -6,8 +6,8 @@ class CommentService {
     return await (await dbContext.Comments.create(body))
   }
 
-  async getAllCommentsByList(taskId) {
-    return await dbContext.Comments.find({ taskId: taskId }).populate('Task').populate('Profile')
+  async getAll(query = {}) {
+    return await dbContext.Comments.find(query).populate('Task').populate('Profile')
   }
 
   // NOTE verify that the user == creator

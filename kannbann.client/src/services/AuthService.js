@@ -7,6 +7,7 @@ import { profileService } from './ProfileService'
 import { boardService } from './BoardService'
 import { listService } from './ListService'
 import { taskService } from './TaskService'
+import { commentService } from './CommentService'
 
 export const AuthService = initialize({
   domain,
@@ -28,6 +29,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   await boardService.getAllBoards()
   await listService.getAllLists()
   await taskService.getAllTasks()
+  await commentService.getAllComments()
 
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })

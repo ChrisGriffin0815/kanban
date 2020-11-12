@@ -34,15 +34,6 @@ class TaskService {
     }
   }
 
-  async deleteTasks(listId) {
-    try {
-      const res = await api.delete('api/lists/' + listId + '/tasks')
-      logger.log(res)
-    } catch (error) {
-      logger.error(error)
-    }
-  }
-
   async editTask(newTask, id) {
     try {
       const res = await api.put('api/tasks/' + id, newTask)
