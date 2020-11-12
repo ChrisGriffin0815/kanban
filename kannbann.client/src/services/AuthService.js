@@ -6,6 +6,7 @@ import { setBearer } from './AxiosService'
 import { profileService } from './ProfileService'
 import { boardService } from './BoardService'
 import { listService } from './ListService'
+import { taskService } from './TaskService'
 
 export const AuthService = initialize({
   domain,
@@ -26,6 +27,7 @@ AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function() {
   AppState.user = AuthService.user
   await boardService.getAllBoards()
   await listService.getAllLists()
+  await taskService.getAllTasks()
 
   // NOTE if there is something you want to do once the user is authenticated, place that here
 })

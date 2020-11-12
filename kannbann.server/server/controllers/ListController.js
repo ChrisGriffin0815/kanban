@@ -10,8 +10,18 @@ export class ListController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.create)
       .delete('/:listId', this.deleteList)
+      .delete('/:listId/tasks', this.deleteTasksByList)
       .get('/:listId/tasks', this.getTasksByList)
       .get('', this.getAllLists)
+  }
+
+  async deleteTasksByList(req, res, next) {
+    try {
+      const userId = req.userInfo.id
+      res.send(await taskService.deleteTasksByList(req.params.listId, userId))
+    } catch (error) {
+      next(error)
+    }
   }
 
   async getAllLists(req, res, next) {

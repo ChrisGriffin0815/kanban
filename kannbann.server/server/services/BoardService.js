@@ -6,6 +6,10 @@ class BoardService {
     return await dbContext.Boards.find(query).populate('Profile')
   }
 
+  async getActiveBoard(id) {
+    return await dbContext.Boards.findById(id).populate('Profile')
+  }
+
   async create(body) {
     return await dbContext.Boards.create(body)
   }

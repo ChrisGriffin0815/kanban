@@ -1,7 +1,7 @@
 <template>
   <div class="newListComponent">
-    <form class="form-group" @submit="createList(boardProp.id)">
-      <input type="text form-group border radius-25" placeholder="New List" v-model="state.newList.title">
+    <form class="" @submit.prevent="createList(boardProp.id)">
+      <input type="text" class="p-2 border radius-25" placeholder="New List" v-model="state.newList.title">
       <button class="btn" type="submit">
         <i class="far fa-paper-plane"></i>
       </button>

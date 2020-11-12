@@ -2,7 +2,7 @@
   <div class="boardComponent col-4" v-if="boardProps.creatorId == profile.id">
     <div class="shadow-lg radius-25 bg-light text-dark p-2 m-3">
       <div class="row">
-        <div class="col-12 d-flex justify-content-start">
+        <div class="col-12 d-flex justify-content-end">
           <button @click="deleteBoard(boardProps.id)" class="btn">
             <i class="far fa-times-circle text-danger"></i>
           </button>
@@ -27,18 +27,6 @@
           <h3>
             {{ boardProps.title }}
           </h3>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <ListComponent v-for="list in lists" :list-props="list" :board-prop="boardProps" :key="list.id" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="collapse" :id="'collapse'+boardProps.id">
-            <newListComponent :board-prop="boardProps" />
-          </div>
         </div>
       </div>
 
@@ -72,6 +60,11 @@
         </div>
       </div>
     </div>
+    <router-link :to="{name: 'ActiveBoard', params: {boardId: boardProps.id}}" class=" text-dark">
+      <h6 class="text-right">
+        See Board
+      </h6>
+    </router-link>
   </div>
 </template>
 
@@ -79,8 +72,7 @@
 import { boardService } from '../services/BoardService'
 import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
-import NewListComponent from '../components/NewListComponent'
-import ListComponent from '../components/ListComponent'
+
 export default {
   name: 'BoardComponent',
   props: ['boardProps'],
@@ -108,7 +100,7 @@ export default {
 
     }
   },
-  components: { NewListComponent, ListComponent }
+  components: { }
 }
 </script>
 

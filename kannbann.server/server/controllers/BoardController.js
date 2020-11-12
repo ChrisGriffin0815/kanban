@@ -12,11 +12,20 @@ export class BoardController extends BaseController {
       .delete('/:boardId', this.deleteBoard)
       .put('/:boardId', this.edit)
       .get('/:boardId/lists', this.getListByBoard)
+      .get('/:boardId', this.getActiveBoard)
   }
 
   async getListByBoard(req, res, next) {
     try {
       res.send(await listService.getAllListsByBoard(req.params.boardId))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async getActiveBoard(req, res, next) {
+    try {
+      res.send(await boardService.getActiveBoard(req.params.boardId))
     } catch (error) {
       next(error)
     }

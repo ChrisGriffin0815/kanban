@@ -12,6 +12,15 @@ class BoardService {
     }
   }
 
+  async getActiveBoard(id) {
+    try {
+      const res = await api.get('api/boards/' + id)
+      AppState.activeBoard = res.data
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
   async getAllBoards() {
     try {
       const res = await api.get('api/boards')

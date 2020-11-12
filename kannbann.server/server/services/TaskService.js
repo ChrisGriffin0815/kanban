@@ -2,6 +2,18 @@ import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
 
 class TaskService {
+  async deleteTasksByList(listId, userId) {
+    const exists = await dbContext.Tasks.find(task => listId === task.listId)
+    console.log(exists, userId)
+    if (!exists) {
+      throw new BadRequest('This Task does not exist')
+      // @ts-ignore
+    } else if (exists._doc.creatorId === userId) {
+      // await dbContext.Tasks.findByIdAndDelete(task => listId === task.listId)
+      return 'List and tasks have been delorted!'
+    }
+  }
+
   async create(body) {
     return await (await dbContext.Tasks.create(body))
   }
