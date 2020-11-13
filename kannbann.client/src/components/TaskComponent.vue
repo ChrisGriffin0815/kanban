@@ -2,13 +2,13 @@
   <div class="taskComponent" v-if="listProps.id == taskProps.listId">
     <div class="col-1">
       <transition name="fade">
-        <div v-if="importId && importId != taskProps.id" @click="exportTask(importId, taskProps.id)">
+        <div v-if="importId && importId != taskProps.listId" @click="exportTask(importId, taskProps.id)">
           <i class="fas fa-share text-dark grow"></i>
         </div>
       </transition>
     </div>
     <div class="col-10 bordery">
-      <p class="text-dark grow my-auto" data-toggle="modal" :data-target="'#modelId' + taskProps.id">
+      <p class="text-dark grow my-auto py-2" data-toggle="modal" :data-target="'#modelId' + taskProps.id">
         {{ taskProps.title }}
       </p>
     </div>
