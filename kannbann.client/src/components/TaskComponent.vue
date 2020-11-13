@@ -1,20 +1,16 @@
 <template>
   <div class="taskComponent" v-if="listProps.id == taskProps.listId">
-    <div class="col-9">
-      <p class="text-dark">
+    <div class="col-1">
+      <transition name="fade">
+        <div v-if="importId && importId != taskProps.id" @click="exportTask(importId, taskProps.id)">
+          <i class="fas fa-share text-dark grow"></i>
+        </div>
+      </transition>
+    </div>
+    <div class="col-10 bordery">
+      <p class="text-dark grow my-auto" data-toggle="modal" :data-target="'#modelId' + taskProps.id">
         {{ taskProps.title }}
       </p>
-    </div>
-    <div class="col-2 d-flex">
-      <button class="btn btn-link text-green" data-toggle="modal" :data-target="'#modelId' + taskProps.id">
-        +
-      </button>
-      <button class="text-danger btn btn-link" @click="deleteTask(taskProps.id)">
-        &times;
-      </button>
-      <button class="btn" v-if="importId" @click="exportTask(importId, taskProps.id)">
-        <i class="fas fa-file-export"></i>
-      </button>
     </div>
 
     <!-- Button trigger modal -->
@@ -31,16 +27,23 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">
-              Comments
+              Inspect
             </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+            <div class="d-flex">
+              <button class="btn" @click="deleteTask(taskProps.id)" data-dismiss="modal">
+                <i class="fas fa-trash"></i>
+              </button>
+              <button type="button" class="btn close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
           </div>
           <div class="modal-body">
-            <h3 class="text-center">
-              {{ taskProps.title }}
-            </h3>
+            <div class="">
+              <h3 class="text-center">
+                {{ taskProps.title }}
+              </h3>
+            </div>
             <form @submit.prevent="addComment(taskProps.id)" class="pb-2">
               <div class="d-flex">
                 <input type="text" class="form-control radius-25 shadow grow" v-model="state.newComment.title">
@@ -106,5 +109,10 @@ export default {
 .move-left {
   position: relative;
   left: -50px;
+}
+
+.bordery {
+  border-top: 1px solid grey;
+
 }
 </style>

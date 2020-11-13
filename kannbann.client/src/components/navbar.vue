@@ -41,26 +41,20 @@
             <img
               :src="user.picture"
               alt="user photo"
-              height="40"
-              class="rounded"
+              height="75"
+              class="rounded-circle"
             />
-            <span class="mx-3">{{ user.name }}</span>
           </div>
           <div
             class="dropdown-menu p-0 list-group w-100"
             :class="{ show: state.dropOpen }"
             @click="state.dropOpen = false"
           >
-            <router-link :to="{ name: 'Profile' }">
-              <div class="list-group-item list-group-item-action hoverable">
-                Profile
-              </div>
-            </router-link>
             <div
               class="list-group-item list-group-item-action hoverable"
               @click="logout"
             >
-              logout
+              Logout
             </div>
           </div>
         </div>

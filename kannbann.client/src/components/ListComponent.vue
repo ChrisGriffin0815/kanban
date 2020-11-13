@@ -1,13 +1,6 @@
 <template>
-  <div class="listComponent col-4" v-if="listProps.boardId == boardProp.id">
-    <div class="radius-25 shadow-lg bg-light text-dark p-2 m-2">
-      <div class="row">
-        <div class="col-12">
-          <h3 class="text-center p-1">
-            {{ listProps.title }}
-          </h3>
-        </div>
-      </div>
+  <div class="listComponent col-4 wrap" v-if="listProps.boardId == boardProp.id">
+    <div class="radius-25 shadow-lg bg-light text-dark p-2 mt-2">
       <div class="row">
         <div class="col-12 d-flex justify-content-end">
           <button class="btn"
@@ -25,6 +18,13 @@
         </div>
       </div>
 
+      <div class="row">
+        <div class="col-12">
+          <h3 class="text-center p-1">
+            {{ listProps.title }}
+          </h3>
+        </div>
+      </div>
       <TaskComponent v-for="task in tasks" class="row" :key="task.id" :task-props="task" :list-props="listProps" />
 
       <div class="collapse" :id="'collapse'+listProps.id">
@@ -45,7 +45,12 @@
             <button v-if="!ID" class="btn btn-success radius-25" @click="copyId(listProps.id)">
               Import On
             </button>
-            <button v-else-if="ID" class="btn btn-danger radius-25" @click="disableImport">
+            <button v-else-if="ID"
+                    class="btn btn-danger radius-25"
+                    @click="disableImport"
+                    data-toggle="collapse"
+                    :data-target="'#collapse'+listProps.id"
+            >
               Import Off
             </button>
           </div>
@@ -110,6 +115,11 @@ export default {
 .move-left {
   position: relative;
   left: -50px;
+}
+.wrap{
+
+  white-space: normal;
+
 }
 
 </style>

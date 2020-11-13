@@ -2,17 +2,13 @@
   <header>
     <Navbar />
   </header>
-  <main>
+  <main class="">
     <router-view v-slot="{Component}">
       <transition name="fade" mode="out-in">
         <component :is="Component" />
       </transition>
     </router-view>
   </main>
-  <footer>
-    <div class="bg-dark text-light text-center p-4">
-    </div>
-  </footer>
 </template>
 
 <script>
