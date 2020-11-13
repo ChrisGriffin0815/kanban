@@ -1,10 +1,12 @@
 <template>
   <div class="newListComponent">
     <form class="" @submit.prevent="createList(boardProp.id)">
-      <input type="text" class="p-2 border radius-25" placeholder="New List" v-model="state.newList.title">
-      <button class="btn" type="submit">
-        <i class="far fa-paper-plane"></i>
-      </button>
+      <div class="d-flex grow">
+        <input type="text" class="form-control radius-25 shadow" placeholder="New List" v-model="state.newList.title">
+        <button class="btn move-left" type="submit">
+          <i class="far fa-paper-plane"></i>
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -36,4 +38,14 @@ export default {
 .radius-25 {
   border-radius: 25px;
 }
+
+.move-left {
+  position: relative;
+  left: -50px;
+}
+
+.grow:hover {
+  transform: scale(1.01);
+  transition: all .25s ease-in-out;
+  }
 </style>

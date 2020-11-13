@@ -1,15 +1,15 @@
 <template>
   <div class="activeBoardPage container-fluid">
     <div class="row">
-      <div class="col-6 offset-3 pt-4">
-        <newListComponent :board-prop="activeBoard" />
+      <div class="col-12 d-flex justify-content-center my-3">
+        <h1 class="text-center p-3 border-box shadow">
+          {{ activeBoard.title }}
+        </h1>
       </div>
     </div>
     <div class="row">
-      <div class="col-12">
-        <h1 class="text-center p-3">
-          {{ activeBoard.title }}
-        </h1>
+      <div class="col-6 offset-3 py-2">
+        <newListComponent :board-prop="activeBoard" />
       </div>
     </div>
     <div class="row">
@@ -48,5 +48,9 @@ export default {
 <style lang="scss" scoped>
 .radius-25 {
   border-radius: 25px;
+}
+
+.border-box {
+  border: 2px solid black;
 }
 </style>

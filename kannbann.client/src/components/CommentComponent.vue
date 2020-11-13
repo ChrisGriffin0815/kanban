@@ -2,7 +2,9 @@
   <div class="commentComponent" v-if="commentProps.taskId == taskProps.id">
     <div class="row">
       <div class="col-10">
-        <p>{{ commentProps.title }}</p>
+        <p class="p-1">
+          {{ commentProps.title }}
+        </p>
       </div>
       <div class="col-2">
         <button class="text-danger btn btn-link" @click="deleteComment(commentProps.id)">

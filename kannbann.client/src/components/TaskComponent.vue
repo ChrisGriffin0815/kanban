@@ -1,18 +1,22 @@
 <template>
   <div class="taskComponent" v-if="listProps.id == taskProps.listId">
-    <div class="col-12 d-flex justify-content-between">
-      <p class="bg-dark text-light">
+    <div class="col-9">
+      <p class="text-dark">
         {{ taskProps.title }}
       </p>
-      <div>
-        <button class="btn btn-link text-green" data-toggle="modal" :data-target="'#modelId' + taskProps.id">
-          +
-        </button>
-        <button class="text-danger btn btn-link" @click="deleteTask(taskProps.id)">
-          &times;
-        </button>
-      </div>
     </div>
+    <div class="col-2 d-flex">
+      <button class="btn btn-link text-green" data-toggle="modal" :data-target="'#modelId' + taskProps.id">
+        +
+      </button>
+      <button class="text-danger btn btn-link" @click="deleteTask(taskProps.id)">
+        &times;
+      </button>
+      <button class="btn" v-if="importId" @click="exportTask(importId, taskProps.id)">
+        <i class="fas fa-file-export"></i>
+      </button>
+    </div>
+
     <!-- Button trigger modal -->
 
     <!-- Modal -->
@@ -33,14 +37,21 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <h3>{{ taskProps.title }}</h3>
-          <form @submit.prevent="addComment(taskProps.id)">
-            <input type="text" v-model="state.newComment.title">
-            <button class="btn">
-              add
-            </button>
-          </form>
-          <CommentComponent :task-props="taskProps" v-for="c in comments" :key="c.id" :comment-props="c" />
+          <div class="modal-body">
+            <h3 class="text-center">
+              {{ taskProps.title }}
+            </h3>
+            <form @submit.prevent="addComment(taskProps.id)" class="pb-2">
+              <div class="d-flex">
+                <input type="text" class="form-control radius-25 shadow grow" v-model="state.newComment.title">
+                <button class="btn">
+                  <i class="far fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+
+            <CommentComponent :task-props="taskProps" v-for="c in comments" :key="c.id" :comment-props="c" />
+          </div>
         </div>
       </div>
     </div>
@@ -65,11 +76,16 @@ export default {
     return {
       state,
       comments: computed(() => AppState.comments),
+      importId: computed(() => AppState.importId),
+
       addComment(taskId, comment) {
         commentService.addComment(taskId, state.newComment)
       },
       deleteTask(id) {
         taskService.deleteTask(id)
+      },
+      exportTask(importId, id) {
+        taskService.exportTask(importId, id)
       }
     }
   },
@@ -78,5 +94,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.radius-25 {
+  border-radius: 25px;
+}
 
+.grow:hover {
+  transform: scale(1.01);
+  transition: all .10s ease-in-out;
+  }
+
+.move-left {
+  position: relative;
+  left: -50px;
+}
 </style>

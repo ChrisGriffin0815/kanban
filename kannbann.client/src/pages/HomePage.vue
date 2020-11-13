@@ -3,17 +3,17 @@
     <div class="row">
       <div class="col-6 offset-3 my-4">
         <form action="" @submit.prevent="createBoard()">
-          <div class="d-flex">
+          <div class="d-flex grow">
             <input type="text"
                    name=""
                    id=""
-                   class="form-control"
+                   class="form-control radius-25 shadow"
                    placeholder="Enter Title"
                    aria-describedby="helpId"
                    v-model="state.newBoard.title"
             >
-            <button type="submit" class="btn bg-transpare">
-              <i class="fas fa-plus-circle"></i>
+            <button type="submit" class="btn move-left">
+              <i class="far fa-paper-plane"></i>
             </button>
           </div>
         </form>
@@ -58,5 +58,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.grow:hover {
+  transform: scale(1.01);
+  transition: all .25s ease-in-out;
+  }
 
+  .radius-25 {
+    border-radius: 25px;
+  }
+
+.move-left {
+  position: relative;
+  left: -50px;
+}
 </style>

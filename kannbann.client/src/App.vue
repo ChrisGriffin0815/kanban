@@ -4,7 +4,7 @@
   </header>
   <main>
     <router-view v-slot="{Component}">
-      <transition name="route" mode="out-in">
+      <transition name="fade" mode="out-in">
         <component :is="Component" />
       </transition>
     </router-view>

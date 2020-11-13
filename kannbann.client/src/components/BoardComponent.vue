@@ -3,27 +3,17 @@
     <div class="shadow-lg radius-25 bg-light text-dark p-2 m-3">
       <div class="row">
         <div class="col-12 d-flex justify-content-end">
-          <button @click="deleteBoard(boardProps.id)" class="btn">
+          <button @click="deleteBoard(boardProps.id)" class="btn grow">
             <i class="far fa-times-circle text-danger"></i>
           </button>
 
-          <button type="button" class="btn" data-toggle="modal" :data-target="'#edit'+boardProps.id">
+          <button type="button" class="btn grow" data-toggle="modal" :data-target="'#edit'+boardProps.id">
             <i class="far fa-edit text-primary"></i>
-          </button>
-
-          <button class="btn"
-                  type="button"
-                  data-toggle="collapse"
-                  :data-target="'#collapse'+boardProps.id"
-                  aria-expanded="false"
-                  aria-controls="contentId"
-          >
-            <i class="fas fa-plus-circle text-success"></i>
           </button>
         </div>
       </div>
       <div class="row">
-        <div class="col-12 py-2">
+        <div class="col-12 py-2 text-center">
           <h3>
             {{ boardProps.title }}
           </h3>
@@ -49,11 +39,13 @@
               </button>
             </div>
             <div class="modal-body">
-              <form action="" @click="editBoard(state.newBoard, boardProps.id)">
-                <input type="text" :placeholder="boardProps.title" v-model="state.newBoard.title">
-                <button type="submit" class="btn bg-transparent">
-                  <i class="far fa-paper-plane text-dark"></i>
-                </button>
+              <form action="" @click.prevent="editBoard(state.newBoard, boardProps.id)">
+                <div class="d-flex">
+                  <input type="text" class="form-control radius-25 shadow" :placeholder="boardProps.title" v-model="state.newBoard.title">
+                  <button type="submit" class="btn bg-transparent move-left">
+                    <i class="far fa-paper-plane text-dark"></i>
+                  </button>
+                </div>
               </form>
             </div>
           </div>
@@ -108,5 +100,14 @@ export default {
 .radius-25 {
   border-radius: 25px;
 }
+.grow:hover {
+  transform: scale(1.01);
+  transition: all .25s ease-in-out;
+  }
+
+  .move-left {
+    position: relative;
+    left: -50px;
+  }
 
 </style>

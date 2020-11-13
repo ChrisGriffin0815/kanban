@@ -1,6 +1,6 @@
 <template>
-  <div class="listComponent float col-4" v-if="listProps.boardId == boardProp.id">
-    <div class="radius-25 shadow-lg bg-light text-dark p-2 m-3">
+  <div class="listComponent col-4" v-if="listProps.boardId == boardProp.id">
+    <div class="radius-25 shadow-lg bg-light text-dark p-2 m-2">
       <div class="row">
         <div class="col-12">
           <h3 class="text-center p-1">
@@ -31,11 +31,23 @@
         <div class="row">
           <div class="col-12">
             <form class="form-group" @submit.prevent="createTask(listProps.id)">
-              <input class="form" type="text" placeholder="New Task" v-model="state.newTask.title">
-              <button type="submit" class="btn btn-primary">
-                +
-              </button>
+              <div class="d-flex">
+                <input class="form-control radius-25 shadow grow" type="text" placeholder="New Task" v-model="state.newTask.title">
+                <button type="submit" class="btn">
+                  <i class="far fa-paper-plane"></i>
+                </button>
+              </div>
             </form>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <button v-if="!ID" class="btn btn-success radius-25" @click="copyId(listProps.id)">
+              Import On
+            </button>
+            <button v-else-if="ID" class="btn btn-danger radius-25" @click="disableImport">
+              Import Off
+            </button>
           </div>
         </div>
       </div>
@@ -62,6 +74,8 @@ export default {
     return {
       state,
       tasks: computed(() => AppState.tasks),
+      ID: computed(() => AppState.importId),
+
       createTask(listId, newTask) {
         taskService.createTask(listId, state.newTask)
       },
@@ -70,6 +84,12 @@ export default {
       },
       deleteList(listId) {
         listService.deleteList(listId)
+      },
+      copyId(id) {
+        AppState.importId = id
+      },
+      disableImport() {
+        AppState.importId = null
       }
     }
   },
@@ -81,4 +101,15 @@ export default {
 .radius-25 {
   border-radius: 25px;
 }
+
+.grow:hover {
+  transform: scale(1.01);
+  transition: all .10s ease-in-out;
+  }
+
+.move-left {
+  position: relative;
+  left: -50px;
+}
+
 </style>

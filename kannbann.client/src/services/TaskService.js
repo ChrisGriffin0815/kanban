@@ -39,6 +39,19 @@ class TaskService {
       const res = await api.put('api/tasks/' + id, newTask)
       logger.log(res.data)
       this.getAllTasks()
+      AppState.importId = null
+    } catch (error) {
+      logger.error(error)
+    }
+  }
+
+  async exportTask(importId, taskId) {
+    try {
+      const editedTask = {}
+      editedTask.listId = importId
+      const res = await api.put('api/tasks/' + taskId, editedTask)
+      logger.log(res.data)
+      this.getAllTasks()
     } catch (error) {
       logger.error(error)
     }
